@@ -40,9 +40,19 @@ const CommentSchema = new mongoose_1.Schema({
 }, { timestamps: true } // Automatically adds createdAt field
 );
 const PostSchema = new mongoose_1.Schema({
-    user: { type: mongoose_1.default.Schema.Types.ObjectId, ref: "User", required: true },
-    text: { type: String, required: true },
-    image: { type: String, default: "" }, // Path or URL to image
+    user: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
+    text: {
+        type: String,
+        required: true,
+    },
+    image: {
+        type: String,
+        default: "", // Path or URL to image
+    },
     likes: [{ type: mongoose_1.default.Schema.Types.ObjectId, ref: "User" }], // Array of User IDs
     comments: [CommentSchema], // Nested comments schema
 }, { timestamps: true } // Automatically adds createdAt and updatedAt fields

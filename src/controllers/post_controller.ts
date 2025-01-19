@@ -9,9 +9,20 @@ class PostController extends BaseController<IPost> {
   }
 
   async post(req: AuthRequest, res: Response) {
-    const _id = req.user._id;
-    req.body.owner = _id;
-    super.post(req, res);
+    const postData = {
+      user: req.user._id,
+      text: req.body.text,
+      image: req.body.image || "",
+      likes: [],
+      comments: [],
+    };
+
+    try {
+      const newPost = await this.model.create(postData);
+      res.status(201).json(newPost);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
   }
 }
 

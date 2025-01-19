@@ -26,9 +26,19 @@ const CommentSchema: Schema = new Schema(
 
 const PostSchema: Schema<IPost> = new Schema(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    text: { type: String, required: true },
-    image: { type: String, default: "" }, // Path or URL to image
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    text: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      default: "", // Path or URL to image
+    },
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // Array of User IDs
     comments: [CommentSchema], // Nested comments schema
   },

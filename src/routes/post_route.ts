@@ -4,9 +4,11 @@ import PostController from "../controllers/post_controller";
 import { authMiddleware } from "../controllers/auth_controller";
 
 router.get("/", PostController.get.bind(PostController));
+
+//get post by id
 router.get("/:id", PostController.get.bind(PostController));
 
-//post
+//create post
 router.post("/", authMiddleware, PostController.post.bind(PostController));
 
 //put

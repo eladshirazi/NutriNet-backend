@@ -1,5 +1,5 @@
 import request from "supertest";
-import init from "../App";
+import init from "../app";
 import mongoose from "mongoose";
 import { App } from "supertest/types";
 import User from "../models/user_model";
@@ -15,7 +15,7 @@ type TestUser = {
 const user: TestUser = {
   username: "username",
   email: "test@test.com",
-  password: "1234",
+  password: "1234567",
 };
 
 let app: App;
@@ -45,11 +45,11 @@ describe("Register Tests", () => {
   });
 
   test("Middleware", async () => {
-    const res = await request(app).get("/student").send();
+    const res = await request(app).get("/user").send();
     expect(res.statusCode).not.toEqual(200);
 
     const res2 = await request(app)
-      .get("/student")
+      .get("/user")
       .set("Authorization", "Bearer " + user.accessToken)
       .send();
     expect(res2.statusCode).toEqual(200);
@@ -70,7 +70,7 @@ describe("Register Tests", () => {
   test("Refresh Token", async () => {
     await new Promise((r) => setTimeout(r, 6000));
     const res = await request(app)
-      .get("/student")
+      .get("/user")
       .set("Authorization", "Bearer " + user.accessToken)
       .send();
     expect(res.statusCode).not.toEqual(200);
@@ -86,7 +86,7 @@ describe("Register Tests", () => {
     user.refreshToken = res2.body.refreshToken;
 
     const res3 = await request(app)
-      .get("/student")
+      .get("/user")
       .set("Authorization", "Bearer " + user.accessToken)
       .send();
     expect(res3.statusCode).toEqual(200);

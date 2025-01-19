@@ -1,4 +1,4 @@
-import init from "./App";
+import init from "./app";
 
 init().then((app) => {
   app.listen(process.env.PORT, () => {
