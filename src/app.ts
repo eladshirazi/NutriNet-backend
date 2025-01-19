@@ -2,6 +2,7 @@ import express, { Express } from "express";
 const app = express();
 import postRoute from "./routes/post_route";
 import authRoute from "./routes/auth_route";
+import userRoute from "./routes/user_route";
 import env from "dotenv";
 env.config();
 
@@ -19,6 +20,7 @@ const init = () => {
 
       app.use("/auth", authRoute);
       app.use("/post", postRoute);
+      app.use("/user", userRoute);
       resolve(app);
     });
   });

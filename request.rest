@@ -1,33 +1,35 @@
 ###
 
-GET http://localhost:3000/student
+GET http://localhost:3000/user
 
 
 ###
 
-GET http://localhost:3000/student?name=jhon
+GET http://localhost:3000/user?name=jhon
 
 
 
 ###
 
-GET http://localhost:3000/student/12347
+GET http://localhost:3000/user/12347
 
 ###
 
-POST http://localhost:3000/student
+POST http://localhost:3000/user
 Content-Type: application/json
 
 {
-    "_id": "12347",
-    "name": "John",
-    "age": "20"
+    "id": 1234;
+  "email": "user1@gmail",
+  "username": "user1",
+  "password": "123456",
+  "profilePicture": ""
 }
 
 
 ###
 
-PUT http://localhost:3000/student
+PUT http://localhost:3000/user
 Content-Type: application/json
 
 {
@@ -39,7 +41,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/student
+DELETE http://localhost:3000/user
 Content-Type: application/json
 
 {
@@ -61,9 +63,9 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "username": "Moshe10",
-    "email": "Moshe@gmail.com",
-    "password": "22"
+    "username": "Elad",
+    "email": "Elad@gmail.com",
+    "password": "123456"
 }
 
 

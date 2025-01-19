@@ -19,13 +19,22 @@ class PostController extends base_controller_1.default {
         super(post_model_1.default);
     }
     post(req, res) {
-        const _super = Object.create(null, {
-            post: { get: () => super.post }
-        });
         return __awaiter(this, void 0, void 0, function* () {
-            const _id = req.user._id;
-            req.body.owner = _id;
-            _super.post.call(this, req, res);
+            // Prepare post data with all necessary fields
+            const postData = {
+                user: req.user._id, // Set the user as the post owner
+                text: req.body.text, // Assuming text is sent in the request body
+                image: req.body.image || "", // Set the image as an empty string if not provided
+                likes: [], // Initialize likes as an empty array
+                comments: [], // Initialize comments as an empty array
+            };
+            try {
+                const newPost = yield this.model.create(postData); // Create the post using the base model
+                res.status(201).json(newPost); // Return the created post with a 201 status
+            }
+            catch (err) {
+                res.status(500).send(err.message); // Handle errors
+            }
         });
     }
 }

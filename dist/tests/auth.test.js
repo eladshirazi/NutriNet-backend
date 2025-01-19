@@ -44,10 +44,10 @@ describe("Register Tests", () => {
         user.refreshToken = res.body.refreshToken;
     }));
     test("Middleware", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield (0, supertest_1.default)(app).get("/student").send();
+        const res = yield (0, supertest_1.default)(app).get("/user").send();
         expect(res.statusCode).not.toEqual(200);
         const res2 = yield (0, supertest_1.default)(app)
-            .get("/student")
+            .get("/user")
             .set("Authorization", "Bearer " + user.accessToken)
             .send();
         expect(res2.statusCode).toEqual(200);
@@ -65,7 +65,7 @@ describe("Register Tests", () => {
     test("Refresh Token", () => __awaiter(void 0, void 0, void 0, function* () {
         yield new Promise((r) => setTimeout(r, 6000));
         const res = yield (0, supertest_1.default)(app)
-            .get("/student")
+            .get("/user")
             .set("Authorization", "Bearer " + user.accessToken)
             .send();
         expect(res.statusCode).not.toEqual(200);
@@ -79,7 +79,7 @@ describe("Register Tests", () => {
         user.accessToken = res2.body.accessToken;
         user.refreshToken = res2.body.refreshToken;
         const res3 = yield (0, supertest_1.default)(app)
-            .get("/student")
+            .get("/user")
             .set("Authorization", "Bearer " + user.accessToken)
             .send();
         expect(res3.statusCode).toEqual(200);

@@ -35,4 +35,4 @@ const PostSchema: Schema<IPost> = new Schema(
   { timestamps: true } // Automatically adds createdAt and updatedAt fields
 );
 
-export default mongoose.model<IPost>("Post", PostSchema);
+export default mongoose.model<IPost>("post", PostSchema);

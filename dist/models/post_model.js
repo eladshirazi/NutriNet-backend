@@ -47,5 +47,5 @@ const PostSchema = new mongoose_1.Schema({
     comments: [CommentSchema], // Nested comments schema
 }, { timestamps: true } // Automatically adds createdAt and updatedAt fields
 );
-exports.default = mongoose_1.default.model("Post", PostSchema);
+exports.default = mongoose_1.default.model("post", PostSchema);
 //# sourceMappingURL=post_model.js.map

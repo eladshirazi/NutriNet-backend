@@ -17,17 +17,17 @@ class BaseController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (req.params.id != null) {
-                    const students = yield this.model.findById(req.params.id);
-                    return res.status(200).send(students);
+                    const user = yield this.model.findById(req.params.id);
+                    return res.status(200).send(user);
                 }
                 else {
                     if (req.query.name != null) {
-                        const students = yield this.model.find({ name: req.query.name });
-                        return res.status(200).send(students);
+                        const users = yield this.model.find({ name: req.query.name });
+                        return res.status(200).send(users);
                     }
                     else {
-                        const students = yield this.model.find();
-                        return res.status(200).send(students);
+                        const users = yield this.model.find();
+                        return res.status(200).send(users);
                     }
                 }
             }
@@ -38,10 +38,10 @@ class BaseController {
     }
     post(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const student = req.body;
+            const user = req.body;
             try {
-                const newStudent = yield this.model.create(student);
-                res.status(201).json(newStudent);
+                const newUser = yield this.model.create(user);
+                res.status(201).json(newUser);
             }
             catch (err) {
                 res.status(500).send(err.message);
@@ -50,10 +50,12 @@ class BaseController {
     }
     put(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const student = req.body;
+            const user = req.body;
             try {
-                const updatedStudent = yield this.model.findByIdAndUpdate(student._id, student, { new: true });
-                res.status(200).json(updatedStudent);
+                const updatedUser = yield this.model.findByIdAndUpdate(user._id, user, {
+                    new: true,
+                });
+                res.status(200).json(updatedUser);
             }
             catch (err) {
                 res.status(500).send(err.message);
@@ -61,14 +63,15 @@ class BaseController {
         });
     }
     delete(req, res) {
-        //const student = req.body;
-        try {
-            //await this.model.findByIdAndDelete(student._id);
-            res.status(200).send();
-        }
-        catch (err) {
-            res.status(500).send(err.message);
-        }
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield this.model.findByIdAndDelete(req.params.id); // Assuming you want to delete by ID
+                res.status(200).send();
+            }
+            catch (err) {
+                res.status(500).send(err.message);
+            }
+        });
     }
 }
 exports.default = BaseController;

@@ -45,11 +45,11 @@ describe("Register Tests", () => {
   });
 
   test("Middleware", async () => {
-    const res = await request(app).get("/student").send();
+    const res = await request(app).get("/user").send();
     expect(res.statusCode).not.toEqual(200);
 
     const res2 = await request(app)
-      .get("/student")
+      .get("/user")
       .set("Authorization", "Bearer " + user.accessToken)
       .send();
     expect(res2.statusCode).toEqual(200);
@@ -70,7 +70,7 @@ describe("Register Tests", () => {
   test("Refresh Token", async () => {
     await new Promise((r) => setTimeout(r, 6000));
     const res = await request(app)
-      .get("/student")
+      .get("/user")
       .set("Authorization", "Bearer " + user.accessToken)
       .send();
     expect(res.statusCode).not.toEqual(200);
@@ -86,7 +86,7 @@ describe("Register Tests", () => {
     user.refreshToken = res2.body.refreshToken;
 
     const res3 = await request(app)
-      .get("/student")
+      .get("/user")
       .set("Authorization", "Bearer " + user.accessToken)
       .send();
     expect(res3.statusCode).toEqual(200);

@@ -7,9 +7,11 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const post_controller_1 = __importDefault(require("../controllers/post_controller"));
 const auth_controller_1 = require("../controllers/auth_controller");
+//get all posts
 router.get("/", post_controller_1.default.get.bind(post_controller_1.default));
+//get post by id
 router.get("/:id", post_controller_1.default.get.bind(post_controller_1.default));
-//post
+//create post
 router.post("/", auth_controller_1.authMiddleware, post_controller_1.default.post.bind(post_controller_1.default));
 //put
 router.put("/", post_controller_1.default.put.bind(post_controller_1.default));

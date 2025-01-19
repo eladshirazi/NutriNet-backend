@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 const post_route_1 = __importDefault(require("./routes/post_route"));
 const auth_route_1 = __importDefault(require("./routes/auth_route"));
+const user_route_1 = __importDefault(require("./routes/user_route"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const mongoose_1 = __importDefault(require("mongoose"));
@@ -21,6 +22,7 @@ const init = () => {
             app.use(body_parser_1.default.json());
             app.use("/auth", auth_route_1.default);
             app.use("/post", post_route_1.default);
+            app.use("/user", user_route_1.default);
             resolve(app);
         });
     });
