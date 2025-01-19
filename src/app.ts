@@ -1,5 +1,7 @@
 import express, { Express } from "express";
 const app = express();
+import postRoute from "./routes/post_route";
+import authRoute from "./routes/auth_route";
 import env from "dotenv";
 env.config();
 
@@ -11,16 +13,14 @@ const init = () => {
     const db = mongoose.connection;
     db.on("error", (error) => console.error(error));
     db.once("open", () => console.log("connected to database"));
-    mongoose
-      .connect(
-        process.env.DATABASE_URL || "mongodb://localhost:27017/NutriNet-backend"
-      )
-      .then(() => {
-        app.use(bodyParser.urlencoded({ extended: true }));
-        app.use(bodyParser.json());
+    mongoose.connect(process.env.DATABASE_URL).then(() => {
+      app.use(bodyParser.urlencoded({ extended: true }));
+      app.use(bodyParser.json());
 
-        resolve(app);
-      });
+      app.use("/auth", authRoute);
+      app.use("/post", postRoute);
+      resolve(app);
+    });
   });
   return promise;
 };
